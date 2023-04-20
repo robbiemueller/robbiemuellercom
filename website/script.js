@@ -80,3 +80,72 @@ if (document.getElementById('current-year')) {
   const currentYear = new Date().getFullYear();
   document.getElementById('current-year').textContent = currentYear;
 }
+
+// Resume page terminal typing
+if (document.getElementById('terminal-resume')) {
+  new Typed('#terminal-resume', {
+    strings: [`<span class="white-text">PS C:\\users\\administrator\\> start resume.html</span><br><br>
+    Access granted to resume.<br><br>
+    <span class="white-text">PS C:\\robbiemuellercom\\resume.html></span>`],
+    typeSpeed: 40,
+    backSpeed: 20,
+    loop: false,
+    cursorChar: '_',
+    contentType: 'html',
+    onComplete: function () {
+      const cursor = document.querySelector('.typed-cursor');
+      cursor.style.animation = 'completed-blink 1s infinite';
+    },
+  });
+}
+
+if (document.getElementById('current-year')) {
+  const currentYear = new Date().getFullYear();
+  document.getElementById('current-year').textContent = currentYear;
+}
+
+// Blog page terminal typing
+if (document.getElementById('terminal-blog')) {
+  new Typed('#terminal-blog', {
+    strings: [`<span class="white-text">PS C:\\users\\administrator\\> start blog.html</span><br><br>
+    Access granted to blog.<br><br>
+    <span class="white-text">PS C:\\robbiemuellercom\\blog.html></span>`],
+    typeSpeed: 40,
+    backSpeed: 20,
+    loop: false,
+    cursorChar: '_',
+    contentType: 'html',
+    onComplete: function () {
+      const cursor = document.querySelector('.typed-cursor');
+      cursor.style.animation = 'completed-blink 1s infinite';
+    },
+  });
+}
+
+if (document.getElementById('current-year')) {
+  const currentYear = new Date().getFullYear();
+  document.getElementById('current-year').textContent = currentYear;
+}
+
+// Gallery page terminal typing
+if (document.getElementById('terminal-gallery')) {
+  new Typed('#terminal-gallery', {
+    strings: [`<span class="white-text">PS C:\\users\\administrator\\> start gallery.html</span><br><br>
+    Access granted to gallery.<br><br>
+    <span class="white-text">PS C:\\robbiemuellercom\\gallery.html></span>`],
+    typeSpeed: 40,
+    backSpeed: 20,
+    loop: false,
+    cursorChar: '_',
+    contentType: 'html',
+    onComplete: function () {
+      const cursor = document.querySelector('.typed-cursor');
+      cursor.style.animation = 'completed-blink 1s infinite';
+    },
+  });
+}
+
+if (document.getElementById('current-year')) {
+  const currentYear = new Date().getFullYear();
+  document.getElementById('current-year').textContent = currentYear;
+}
