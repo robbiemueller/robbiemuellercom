@@ -203,7 +203,7 @@ nav a.gallery-link:hover {
 }
 
 .about-title {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   color: #0078D7;
   margin-bottom: 1rem;
 }
@@ -211,7 +211,7 @@ nav a.gallery-link:hover {
 .about-subtitle {
   font-size: 1.5rem;
   color: #FF9900;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .about-text {
@@ -259,22 +259,17 @@ nav a.gallery-link:hover {
 .about-content {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 1.5rem;
 }
 
 .about-image {
-  max-width: 375px;
-  max-height: 280px;
-  margin-right: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 375px;
+  height: 280px;
+  margin-right: 20px;
 }
 
 .about-text-wrapper {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .about-container {
@@ -292,8 +287,32 @@ nav a.gallery-link:hover {
     flex-direction: column;
   }
 
-  .about-image {
-    margin-right: 0;
-    margin-bottom: 1.5rem;
-  }
+}
+
+.about-image {
+  max-width: 100%;
+  height: auto;
+  border: .5px solid #333;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.12);
+  margin-bottom: 8px;
+
+.about-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.image-container {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+}
+
+.about-image-caption {
+  font-size: 14px;
+  color: #777;
+  margin: 0;
 }

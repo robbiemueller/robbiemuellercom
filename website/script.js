@@ -61,7 +61,7 @@ const currentYear = new Date().getFullYear();
 // About page terminal typing
 if (document.getElementById('terminal-about')) {
   new Typed('#terminal-about', {
-    strings: [`<span class="white-text">PS C:\\users\\administrator\\> cd about.html</span><br><br>
+    strings: [`<span class="white-text">PS C:\\users\\administrator\\> start about.html</span><br><br>
     Access granted to about page.<br><br>
     <span class="white-text">PS C:\\robbiemuellercom\\about.html></span>`],
     typeSpeed: 40,
