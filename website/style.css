@@ -48,13 +48,13 @@ body {
 
 
 .terminal {
-  background-color: #000000;
+  background-color: #101820;
   padding: 0;
   border-radius: 5px;
   width: 100%;
   display: inline-block;
   text-align: left;
-  border: 1px solid #3c3e47;
+  border: 1px solid #7D55C7;
   overflow: hidden;
   font-family: 'IBM Plex Mono', Arial, sans-serif;
   color: #00ff47;
@@ -127,27 +127,27 @@ nav a {
 
 
 nav a:hover {
-  color: #0078D7;
+  color: #7D55C7;
 }
 
 nav a.home-link:hover {
-  color: #F4B400;
+  color: #05C3DD;
 }
 
 nav a.about-link:hover {
-  color: #0078D7;
+  color: #F3EA5D;
 }
 
 nav a.resume-link:hover {
-  color: #FF9900;
+  color: #F277C6;
 }
 
 nav a.blog-link:hover {
-  color: #DB4437;
+  color: #4D49BE;
 }
 
 nav a.gallery-link:hover {
-  color: #34A853;
+  color: #7D55C7;
 }
 
 .terminal-buttons {
@@ -192,7 +192,7 @@ nav a.gallery-link:hover {
   padding: 0;
   white-space: pre-wrap;
   font-family: 'Courier New', monospace; /* Use a monospace font for the ASCII art */
-  color: #ff00b8;
+  color: #E0457B;
 }
 
 @media (max-width: 480px) {
@@ -209,15 +209,6 @@ nav a.gallery-link:hover {
   }
 }
 
-
-/* Color cycling */
-@keyframes color-cycle {
-  0% { color: #0078D7; }
-  25% { color: #FF9900; }
-  50% { color: #34A853; }
-  75% { color: #DB4437; }
-  100% { color: #0078D7; }
-}
 
 .custom-cursor {
   display: inline;
@@ -255,14 +246,14 @@ nav a.gallery-link:hover {
 
 .about-title {
   font-size: 3.5rem;
-  color: #0078D7;
+  color: #7D55C7;
   margin-bottom: 1rem;
 }
 
 
 .about-subtitle {
   font-size: 1.5rem;
-  color: #FF9900;
+  color: #F277C6;
   margin-bottom: 1rem;
 }
 
@@ -389,7 +380,7 @@ nav a.gallery-link:hover {
 .terminal-title {
   display: inline-block;
   font-size: 0.8rem;
-  color: #FFF;
+  color: #F3EA5D;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -398,4 +389,73 @@ nav a.gallery-link:hover {
 
 .terminal-title::before {
   content: "RobbieOS version 1.337";
+}
+
+.section-divider {
+  border-bottom: 1px solid #ccc;
+  margin: 1rem 0;
+}
+
+.resume-container {
+  padding: 1rem;
+}
+
+.resume-section-title {
+  color: #101820;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.experience-company {
+  color: #101820;
+}
+
+.experience-job-title {
+  color:#101820
+}
+
+.certification-logos-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.certification-logo {
+  flex-basis: 150px;
+  flex-grow: 1;
+  max-width: 150px;
+}
+
+.certification-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.certification-logo:hover img {
+  transform: translateY(-5px);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.social-link {
+  font-size: 18px;
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.social-link:hover {
+  color: #101820; /* Change the color to your preferred hover color */
+}
+
+.social-link:hover i {
+  animation: fa-beat 1s infinite;
 }
