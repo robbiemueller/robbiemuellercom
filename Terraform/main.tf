@@ -20,9 +20,7 @@ resource "aws_s3_bucket" "static_website" {
     index_document = "index.html"
     error_document = "error.html"
   }
-
-
-
+}
 
 locals {
   s3_origin_id = "static_website"
