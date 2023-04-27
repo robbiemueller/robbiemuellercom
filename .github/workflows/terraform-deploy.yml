@@ -29,21 +29,27 @@ jobs:
       - name: 'Terraform Init'
         run: terraform init
         working-directory: Terraform
-        
-      - name: Check if S3 bucket exists
+
+      - name: Check if S3 bucket exists and managed by Terraform
         id: check_bucket
         run: |
           EXISTS=$(aws s3api head-bucket --bucket robbiemuellercom --region us-east-1 || echo "not_exists")
+          MANAGED=$(terraform state list | grep aws_s3_bucket.static_website || echo "not_managed")
           if [[ $EXISTS == "not_exists" ]]; then
             echo "Bucket does not exist"
             echo "::set-output name=exists::false"
-          else
-            echo "Bucket exists"
+          elif [[ $MANAGED == "not_managed" ]]; then
+            echo "Bucket exists but not managed by Terraform"
             echo "::set-output name=exists::true"
+            echo "::set-output name=managed::false"
+          else
+            echo "Bucket exists and managed by Terraform"
+            echo "::set-output name=exists::true"
+            echo "::set-output name=managed::true"
           fi
 
-      - name: Import existing S3 bucket (if exists)
-        if: steps.check_bucket.outputs.exists == 'true'
+      - name: Import existing S3 bucket (if exists and not managed)
+        if: steps.check_bucket.outputs.exists == 'true' && steps.check_bucket.outputs.managed == 'false'
         run: terraform import aws_s3_bucket.static_website robbiemuellercom
         working-directory: Terraform
 
