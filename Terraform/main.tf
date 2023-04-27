@@ -2,14 +2,28 @@ provider "aws" {
   region = "us-east-1" 
 }
 
+data "terraform_remote_state" "s3" {
+  backend = "s3"
+
+  config = {
+    bucket = "robbiemuellercom"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+
 resource "aws_s3_bucket" "static_website" {
-  bucket = "robbiemuellercom"
+  for_each = toset(data.terraform_remote_state.s3.outputs.static_website_bucket_name == "robbiemuellercom" ? [] : ["robbiemuellercom"])
+
+  bucket = each.key
 
   website {
     index_document = "index.html"
     error_document = "error.html"
   }
 }
+
 
 locals {
   s3_origin_id = "static_website"
@@ -68,6 +82,7 @@ resource "aws_s3_bucket_object" "abouthtml" {
   key    = "about.html"
   source = "${path.module}/website/about.html"
   content_type = "text/html"
+  depends_on   = [aws_s3_bucket.static_website]
 }
 
 resource "aws_s3_bucket_object" "bloghtml" {
@@ -75,6 +90,7 @@ resource "aws_s3_bucket_object" "bloghtml" {
   key    = "blog.html"
   source = "${path.module}/website/blog.html"
   content_type = "text/html"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "galleryhtml" {
@@ -82,6 +98,7 @@ resource "aws_s3_bucket_object" "galleryhtml" {
   key    = "gallery.html"
   source = "${path.module}/website/gallery.html"
   content_type = "text/html"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "indexhtml" {
@@ -96,6 +113,7 @@ resource "aws_s3_bucket_object" "resumehtml" {
   key    = "resume.html"
   source = "${path.module}/website/resume.html"
   content_type = "text/html"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "scriptjs" {
@@ -103,6 +121,7 @@ resource "aws_s3_bucket_object" "scriptjs" {
   key    = "script.js"
   source = "${path.module}/website/script.js"
   content_type = "application/javascript"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "stylecss" {
@@ -110,6 +129,7 @@ resource "aws_s3_bucket_object" "stylecss" {
   key    = "style.css"
   source = "${path.module}/website/style.css"
   content_type = "text/css"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "awsccppng" {
@@ -117,6 +137,7 @@ resource "aws_s3_bucket_object" "awsccppng" {
   key    = "images/awsccp.png"
   source = "${path.module}/website/images/awsccp.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "awssysopspng" {
@@ -124,6 +145,7 @@ resource "aws_s3_bucket_object" "awssysopspng" {
   key    = "images/awssysops.png"
   source = "${path.module}/website/images/awssysops.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "azure-security-engineer-associate600x600png" {
@@ -131,6 +153,7 @@ resource "aws_s3_bucket_object" "azure-security-engineer-associate600x600png" {
   key    = "images/azure-security-engineer-associate600x600.png"
   source = "${path.module}/website/images/azure-security-engineer-associate600x600.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "azurefundpng" {
@@ -138,6 +161,7 @@ resource "aws_s3_bucket_object" "azurefundpng" {
   key    = "images/azurefund.png"
   source = "${path.module}/website/images/azurefund.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "ccna_600png" {
@@ -145,6 +169,7 @@ resource "aws_s3_bucket_object" "ccna_600png" {
   key    = "images/ccna_600.png"
   source = "${path.module}/website/images/ccna_600.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "CompTIA_A_2Bcepng" {
@@ -152,6 +177,7 @@ resource "aws_s3_bucket_object" "CompTIA_A_2Bcepng" {
   key    = "images/CompTIA_A_2Bce.png"
   source = "${path.module}/website/images/CompTIA_A_2Bce.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "Comptia_CySA_2Bcepng" {
@@ -159,6 +185,7 @@ resource "aws_s3_bucket_object" "Comptia_CySA_2Bcepng" {
   key    = "images/Comptia_CySA_2Bce.png"
   source = "${path.module}/website/images/Comptia_CySA_2Bce.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "CompTIA_Network_2Bcepng" {
@@ -166,6 +193,7 @@ resource "aws_s3_bucket_object" "CompTIA_Network_2Bcepng" {
   key    = "images/CompTIA_Network_2Bce.png"
   source = "${path.module}/website/images/CompTIA_Network_2Bce.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "CompTIA_Project_2Bpng" {
@@ -173,6 +201,7 @@ resource "aws_s3_bucket_object" "CompTIA_Project_2Bpng" {
   key    = "images/CompTIA_Project_2B.png"
   source = "${path.module}/website/images/CompTIA_Project_2B.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "CompTIA_Security_2Bcepng" {
@@ -180,6 +209,7 @@ resource "aws_s3_bucket_object" "CompTIA_Security_2Bcepng" {
   key    = "images/CompTIA_Security_2Bce.png"
   source = "${path.module}/website/images/CompTIA_Security_2Bce.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "dutchharborjpg" {
@@ -187,11 +217,13 @@ resource "aws_s3_bucket_object" "dutchharborjpg" {
   key    = "images/dutchharbor.jpg"
   source = "${path.module}/website/images/dutchharbor.jpg"
   content_type = "image/jpeg"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
 
 resource "aws_s3_bucket_object" "isc2_associatepng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/isc2_associate.png"
-  source = "${path.module}/website/imgimagesaes/isc2_associate.png"
+  source = "${path.module}/website/images/isc2_associate.png"
   content_type = "image/png"
+  depends_on   = [aws_s3_bucket.static_website]  
 }
