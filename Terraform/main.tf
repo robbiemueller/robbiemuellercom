@@ -14,7 +14,7 @@ provider "aws" {
 resource "aws_s3_bucket" "static_website" {
   bucket = "robbiemuellercom"
 
-  versioning {
+  versioning_configuration {
     status = "Enabled"
   }
 
@@ -23,6 +23,7 @@ resource "aws_s3_bucket" "static_website" {
     error_document = "error.html"
   }
 }
+
 
 locals {
   s3_origin_id = "static_website"
