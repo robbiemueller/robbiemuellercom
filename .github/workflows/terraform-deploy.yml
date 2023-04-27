@@ -14,9 +14,6 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v2
 
-      - name: 'List Directory Contents'
-        run: ls -la
-
       - name: 'Setup Terraform'
         uses: hashicorp/setup-terraform@v1
         with:
@@ -29,14 +26,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1   
 
-      - name: 'Print Current Working Directory'
-        run: pwd
-
       - name: Check if S3 bucket exists
         id: check_bucket
         run: |
-          EXISTS=$(aws s3api head-bucket --bucket robbiemuellercom --region us-east-1 2>&1 || true)
-          if [[ -z $EXISTS ]]; then
+          EXISTS=$(aws s3api head-bucket --bucket robbiemuellercom --region us-east-1 || echo "not_exists")
+          if [[ $EXISTS == "not_exists" ]]; then
             echo "Bucket does not exist"
             echo "::set-output name=exists::false"
           else
