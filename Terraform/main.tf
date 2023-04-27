@@ -1,17 +1,15 @@
-provider "aws" {
-  region = "us-east-1" 
-}
-
-data "terraform_remote_state" "s3" {
-  backend = "s3"
-
-  config = {
-    bucket = "robbiemuellercom"
+terraform {
+  backend "s3" {
+    bucket = "tfstaterobbie"
     key    = "terraform.tfstate"
     region = "us-east-1"
   }
 }
 
+
+provider "aws" {
+  region = "us-east-1" 
+}
 
 resource "aws_s3_bucket" "static_website" {
   bucket = "robbiemuellercom"
