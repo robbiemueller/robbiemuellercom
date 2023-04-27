@@ -14,6 +14,10 @@ provider "aws" {
 resource "aws_s3_bucket" "static_website" {
   bucket = "robbiemuellercom"
 
+  versioning {
+    status = "Enabled"
+  }
+
   website {
     index_document = "index.html"
     error_document = "error.html"
@@ -22,6 +26,26 @@ resource "aws_s3_bucket" "static_website" {
 
 locals {
   s3_origin_id = "static_website"
+}
+
+resource "aws_s3_bucket_policy" "public_read" {
+  bucket = aws_s3_bucket.static_website.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = "*"
+        Action = [
+          "s3:GetObject"
+        ]
+        Resource = [
+          "${aws_s3_bucket.static_website.arn}/*"
+        ]
+      }
+    ]
+  })
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
