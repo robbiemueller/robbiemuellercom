@@ -24,6 +24,14 @@ resource "aws_s3_bucket" "static_website" {
   }
 }
 
+resource "aws_s3_bucket_public_access_block" "static_website_access" {
+  bucket = aws_s3_bucket.static_website.id
+
+  block_public_acls   = false
+  block_public_policy = false
+  ignore_public_acls  = true
+  restrict_public_buckets = false
+}
 
 
 locals {
@@ -32,6 +40,7 @@ locals {
 
 resource "aws_s3_bucket_policy" "public_read" {
   bucket = aws_s3_bucket.static_website.id
+  depends_on = [aws_s3_bucket_public_access_block.static_website_access]
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -49,6 +58,7 @@ resource "aws_s3_bucket_policy" "public_read" {
     ]
   })
 }
+
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
