@@ -126,7 +126,7 @@ resource "aws_s3_bucket_object" "awssysopspng" {
   content_type = "image/png"
 }
 
-resource "aws_s3_bucket_object" "azure-security-engineer-associate600x600.png" {
+resource "aws_s3_bucket_object" "azure-security-engineer-associate600x600png" {
   bucket = aws_s3_bucket.website.id
   key    = "images/azure-security-engineer-associate600x600.png"
   source = "${path.module}/website/imgaes/azure-security-engineer-associate600x600.png"
