@@ -1,57 +1,48 @@
-name: Multi-Cloud CI/CD Pipeline
+name: 'Terraform Deploy'
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  deploy-aws:
+  terraform:
+    name: 'Terraform'
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: 'Checkout'
+        uses: actions/checkout@v2
 
-    - name: Install AWS CLI
-      run: |
-        sudo apt-get update && sudo apt-get install -y awscli
+      - name: 'Setup Terraform'
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.x
 
-    - name: Deploy to AWS
-      run: |
-        terraform init
-        terraform apply -auto-approve
+      - name: 'Terraform Init'
+        run: terraform init
+        working-directory: terraform
 
-  deploy-gcp:
-    runs-on: ubuntu-latest
+      - name: 'Terraform Validate'
+        run: terraform validate
+        working-directory: terraform
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: 'Terraform Plan'
+        run: terraform plan
+        working-directory: terraform
+        continue-on-error: true
 
-    - name: Install GCP SDK
-      run: |
-        export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
-        echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-        curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-        sudo apt-get update && sudo apt-get install -y google-cloud-sdk
+      - name: 'Terraform Apply'
+        run: terraform apply -auto-approve
+        working-directory: terraform
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
-    - name: Deploy to GCP
-      run: |
-        terraform init
-        terraform apply -auto-approve
+      - name: 'Configure AWS Credentials'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
-  deploy-azure:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install Azure CLI
-      run: |
-        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-    - name: Deploy to Azure
-      run: |
-        terraform init
-        terraform apply -auto-approve
+      - name: 'Deploy Website'
+        run: aws s3 sync website/ s3://robbiemuellercom --delete
