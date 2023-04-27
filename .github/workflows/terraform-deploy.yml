@@ -47,5 +47,5 @@ jobs:
       - name: 'Deploy Website'
         run: aws s3 sync website/ s3://robbiemuellercom --delete
 
-        - name: 'List Directory Contents'
+      - name: 'List Directory Contents'
         run: ls -la
