@@ -21,20 +21,20 @@ jobs:
 
       - name: 'Terraform Init'
         run: terraform init
-        working-directory: terraform
+        working-directory: ./robbiemuellercom/terraform
 
       - name: 'Terraform Validate'
         run: terraform validate
-        working-directory: terraform
+        working-directory: ./robbiemuellercom/terraform
 
       - name: 'Terraform Plan'
         run: terraform plan
-        working-directory: terraform
+        working-directory: ./robbiemuellercom/terraform
         continue-on-error: true
 
       - name: 'Terraform Apply'
         run: terraform apply -auto-approve
-        working-directory: terraform
+        working-directory: ./robbiemuellercom/terraform
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
       - name: 'Configure AWS Credentials'
