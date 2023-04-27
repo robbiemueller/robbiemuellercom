@@ -32,6 +32,22 @@ jobs:
       - name: 'Print Current Working Directory'
         run: pwd
 
+      - name: Check if S3 bucket exists
+        id: check_bucket
+        run: |
+          EXISTS=$(aws s3api head-bucket --bucket robbiemuellercom --region us-east-1 2>&1 || true)
+          if [[ -z $EXISTS ]]; then
+            echo "Bucket does not exist"
+            echo "::set-output name=exists::false"
+          else
+            echo "Bucket exists"
+            echo "::set-output name=exists::true"
+          fi
+
+      - name: Import existing S3 bucket (if exists)
+        if: steps.check_bucket.outputs.exists == 'true'
+        run: terraform import aws_s3_bucket.static_website robbiemuellercom
+
       - name: 'Terraform Init'
         run: terraform init
         working-directory: Terraform

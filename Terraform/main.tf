@@ -14,15 +14,14 @@ data "terraform_remote_state" "s3" {
 
 
 resource "aws_s3_bucket" "static_website" {
-  for_each = toset(data.terraform_remote_state.s3.outputs.static_website_bucket_name == "robbiemuellercom" ? [] : ["robbiemuellercom"])
-
-  bucket = each.key
+  bucket = "robbiemuellercom"
 
   website {
     index_document = "index.html"
     error_document = "error.html"
   }
-}
+
+
 
 
 locals {
