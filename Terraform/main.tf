@@ -115,83 +115,83 @@ resource "aws_s3_bucket_object" "stylecss" {
 resource "aws_s3_bucket_object" "awsccppng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/awsccp.png"
-  source = "${path.module}/website/imgaes/awsccp.png"
+  source = "${path.module}/website/images/awsccp.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "awssysopspng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/awssysops.png"
-  source = "${path.module}/website/imgaes/awssysops.png"
+  source = "${path.module}/website/images/awssysops.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "azure-security-engineer-associate600x600png" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/azure-security-engineer-associate600x600.png"
-  source = "${path.module}/website/imgaes/azure-security-engineer-associate600x600.png"
+  source = "${path.module}/website/images/azure-security-engineer-associate600x600.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "azurefundpng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/azurefund.png"
-  source = "${path.module}/website/imgaes/azurefund.png"
+  source = "${path.module}/website/images/azurefund.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "ccna_600png" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/ccna_600.png"
-  source = "${path.module}/website/imgaes/ccna_600.png"
+  source = "${path.module}/website/images/ccna_600.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "CompTIA_A_2Bcepng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/CompTIA_A_2Bce.png"
-  source = "${path.module}/website/imgaes/CompTIA_A_2Bce.png"
+  source = "${path.module}/website/images/CompTIA_A_2Bce.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "Comptia_CySA_2Bcepng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/Comptia_CySA_2Bce.png"
-  source = "${path.module}/website/imgaes/Comptia_CySA_2Bce.png"
+  source = "${path.module}/website/images/Comptia_CySA_2Bce.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "CompTIA_Network_2Bcepng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/CompTIA_Network_2Bce.png"
-  source = "${path.module}/website/imgaes/CompTIA_Network_2Bce.png"
+  source = "${path.module}/website/images/CompTIA_Network_2Bce.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "CompTIA_Project_2Bpng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/CompTIA_Project_2B.png"
-  source = "${path.module}/website/imgaes/CompTIA_Project_2B.png"
+  source = "${path.module}/website/images/CompTIA_Project_2B.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "CompTIA_Security_2Bcepng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/CompTIA_Security_2Bce.png"
-  source = "${path.module}/website/imgaes/CompTIA_Security_2Bce.png"
+  source = "${path.module}/website/images/CompTIA_Security_2Bce.png"
   content_type = "image/png"
 }
 
 resource "aws_s3_bucket_object" "dutchharborjpg" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/dutchharbor.jpg"
-  source = "${path.module}/website/imgaes/dutchharbor.jpg"
+  source = "${path.module}/website/images/dutchharbor.jpg"
   content_type = "image/jpeg"
 }
 
 resource "aws_s3_bucket_object" "isc2_associatepng" {
   bucket = aws_s3_bucket.static_website.id
   key    = "images/isc2_associate.png"
-  source = "${path.module}/website/imgaes/isc2_associate.png"
+  source = "${path.module}/website/imgimagesaes/isc2_associate.png"
   content_type = "image/png"
 }
