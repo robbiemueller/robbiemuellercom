@@ -33,20 +33,23 @@ jobs:
       - name: Check if S3 bucket exists and managed by Terraform
         id: check_bucket
         run: |
-          EXISTS=$(aws s3api head-bucket --bucket robbiemuellercom --region us-east-1 || echo "not_exists")
-          MANAGED=$(terraform state list | grep aws_s3_bucket.static_website || echo "not_managed")
-          if [[ $EXISTS == "not_exists" ]]; then
+          EXISTS=$(aws s3api head-bucket --bucket robbiemuellercom --region us-east-1 2>&1 || true)
+          if [[ -z $EXISTS ]]; then
             echo "Bucket does not exist"
             echo "::set-output name=exists::false"
-          elif [[ $MANAGED == "not_managed" ]]; then
-            echo "Bucket exists but not managed by Terraform"
-            echo "::set-output name=exists::true"
-            echo "::set-output name=managed::false"
           else
-            echo "Bucket exists and managed by Terraform"
+            echo "Bucket exists"
             echo "::set-output name=exists::true"
-            echo "::set-output name=managed::true"
+            MANAGED=$(terraform state list | grep aws_s3_bucket.static_website || echo "not_managed")
+            if [[ $MANAGED == "not_managed" ]]; then
+              echo "Bucket not managed by Terraform"
+              echo "::set-output name=managed::false"
+            else
+              echo "Bucket managed by Terraform"
+              echo "::set-output name=managed::true"
+            fi
           fi
+
 
       - name: Import existing S3 bucket (if exists and not managed)
         if: steps.check_bucket.outputs.exists == 'true' && steps.check_bucket.outputs.managed == 'false'
