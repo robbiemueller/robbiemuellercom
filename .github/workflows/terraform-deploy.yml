@@ -22,6 +22,13 @@ jobs:
         with:
           terraform_version: 1.x
 
+      - name: 'Configure AWS Credentials'
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1          
+
       - name: 'Terraform Init'
         run: terraform init
         working-directory: Terraform
@@ -39,13 +46,6 @@ jobs:
         run: terraform apply -auto-approve
         working-directory: Terraform
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-
-      - name: 'Configure AWS Credentials'
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
 
       - name: 'Deploy Website'
         run: aws s3 sync website/ s3://robbiemuellercom --delete
