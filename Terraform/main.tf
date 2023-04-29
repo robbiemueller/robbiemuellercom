@@ -285,7 +285,7 @@ resource "aws_lambda_function" "visitor_counter" {
   handler          = "lambda_function.lambda_handler"
   runtime          = "python3.8"
   filename         = "lambda.zip"
-  source_code_hash = filebase64sha256("${path.cwd}/lambda.zip")
+  source_code_hash = "uupnaMNPumpLe2kkip6v/I2YVD6hG6+PAiT3ORPqLvM="
   role             = aws_iam_role.lambda_execution_role.arn
 
   environment {
