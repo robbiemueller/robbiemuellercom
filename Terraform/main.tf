@@ -290,7 +290,7 @@ resource "aws_lambda_function" "visitor_counter" {
 
   environment {
     variables = {
-      DYNAMODB_TABLE = aws_dynamodb_table.visitor_counter_table.name
+      DYNAMODB_TABLE = aws_dynamodb_table.visitor_counter.name
     }
   }
 }
@@ -334,7 +334,7 @@ resource "aws_iam_role_policy" "lambda_execution_policy" {
           "dynamodb:UpdateItem"
         ]
         Effect   = "Allow"
-        Resource = aws_dynamodb_table.visitor_counter_table.arn
+        Resource = aws_dynamodb_table.visitor_counter.arn
       }
     ]
   })
