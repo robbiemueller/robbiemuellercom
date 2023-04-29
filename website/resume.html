@@ -60,10 +60,7 @@
             <a href="contact.html" class="social-link">
               <i class="fas fa-envelope"></i>
               </a>
-          </nav>   
-          <div id="visitor-counter" class="visitor-counter">
-            Visitors: <span id="visitor-count">...</span>
-          </div>      
+          </nav>       
           <div class="resume-container">
             <h2 class="resume-section-title">Experience</h2>
             <div class="experience-item">
@@ -153,6 +150,9 @@
               <!-- Add more certification logos -here -->
               </a>
             </div>
+            <div id="visitor-counter" class="visitor-counter">
+              <span id="visitor-count">...</span>
+            </div>  
           </div>
     </section>
   </main>
@@ -171,13 +171,15 @@
     fetch('https://5r77qkm6e2.execute-api.us-east-1.amazonaws.com/prod/count')
       .then(response => response.json())
       .then(data => {
-        document.getElementById('visitor-count').textContent = data.visitorCount;
+        console.log(data); // Add this line
+        document.getElementById('visitor-count').textContent = data;
       })
       .catch(error => {
         console.error('Error fetching visitor count:', error);
         document.getElementById('visitor-count').textContent = 'Error';
       });
   </script>
+  
   <script src="script.js"></script>
 </body>
 
