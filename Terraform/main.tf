@@ -70,6 +70,14 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
+  aliases = ["robbiemueller.com"]
+
+  viewer_certificate {
+    acm_certificate_arn      = "arn:aws:acm:us-east-1:284868345684:certificate/e470dcb2-5e01-4e28-8076-1569318ec59f"
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2018"
+  }
+
   enabled             = true
   is_ipv6_enabled     = true
   comment             = "RobbieMueller.com Cloudfront Distrbution"
@@ -102,10 +110,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
-  viewer_certificate {
-    cloudfront_default_certificate = true
-  }
 }
+
 
 #Website objects for S3 Bucket
 resource "aws_s3_bucket_object" "abouthtml" {
