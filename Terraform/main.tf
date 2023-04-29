@@ -70,7 +70,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
-  aliases = ["robbiemueller.com"]
+  aliases = ["robbiemueller.com", "www.robbiemueller.com"]
 
   viewer_certificate {
     acm_certificate_arn      = "arn:aws:acm:us-east-1:284868345684:certificate/18a69634-571c-44ad-8ec5-e5ef02c8e235"
