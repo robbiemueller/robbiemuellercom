@@ -264,3 +264,18 @@ resource "aws_s3_bucket_object" "isc2_associatepng" {
   content_type = "image/png"
   depends_on   = [aws_s3_bucket.static_website]  
 }
+
+resource "aws_dynamodb_table" "visitor_counter" {
+  name           = "visitor_counter"
+  billing_mode   = "PAY_PER_REQUEST"
+  hash_key       = "page"
+
+  attribute {
+    name = "page"
+    type = "S"
+  }
+
+  tags = {
+    Name = "VisitorCounter"
+  }
+}
