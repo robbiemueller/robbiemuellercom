@@ -22,10 +22,16 @@ def lambda_handler(event, context):
         print(e.response['Error']['Message'])
         return {
             'statusCode': 500,
-            'body': json.dumps('An error occurred while updating the visitor counter.')
+            'body': json.dumps('An error occurred while updating the visitor counter.'),
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            }
         }
     else:
         return {
             'statusCode': 200,
-            'body': json.dumps(f"Total visits: {response['Attributes']['visits']}")
+            'body': json.dumps(f"Total visits: {response['Attributes']['visits']}"),
+            'headers': {
+                'Access-Control-Allow-Origin': '*'
+            }
         }

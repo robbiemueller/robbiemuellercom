@@ -168,7 +168,7 @@
   <!-- Add your JavaScript file here -->
   <script>
     // Fetch visitor count from API Gateway and update the content
-    fetch('https://5r77qkm6e2.execute-api.us-east-1.amazonaws.com/prod/visitors')
+    fetch('https://5r77qkm6e2.execute-api.us-east-1.amazonaws.com/prod/count')
       .then(response => response.json())
       .then(data => {
         document.getElementById('visitor-count').textContent = data.visitorCount;
