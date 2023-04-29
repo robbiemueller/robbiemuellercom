@@ -279,3 +279,63 @@ resource "aws_dynamodb_table" "visitor_counter" {
     Name = "VisitorCounter"
   }
 }
+
+resource "aws_lambda_function" "visitor_counter" {
+  function_name    = "visitorCounter"
+  handler          = "lambda_function.lambda_handler"
+  runtime          = "python3.8"
+  filename         = "lambda.zip"
+  source_code_hash = filebase64sha256("lambda.zip")
+  role             = aws_iam_role.lambda_execution_role.arn
+
+  environment {
+    variables = {
+      DYNAMODB_TABLE = aws_dynamodb_table.visitor_counter_table.name
+    }
+  }
+}
+
+resource "aws_iam_role" "lambda_execution_role" {
+  name = "lambda_execution_role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "lambda_execution_policy" {
+  name = "lambda_execution_policy"
+  role = aws_iam_role.lambda_execution_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Effect   = "Allow"
+        Resource = "arn:aws:logs:*:*:*"
+      },
+      {
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:UpdateItem"
+        ]
+        Effect   = "Allow"
+        Resource = aws_dynamodb_table.visitor_counter_table.arn
+      }
+    ]
+  })
+}
