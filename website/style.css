@@ -459,3 +459,8 @@ nav a.gallery-link:hover {
 .social-link:hover i {
   animation: fa-beat 1s infinite;
 }
+
+.visitor-counter {
+  text-align: center;
+  margin-bottom: 10px;
+}
