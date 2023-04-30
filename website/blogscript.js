@@ -35,75 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // Get the current year
 const currentYear = new Date().getFullYear();
 
-  // Typed.js for the name and snippet combined
-  new Typed('#name-text', {
-    strings: [`Copyright (C) ${currentYear} Robbie Mueller.
-               All rights reserved.<br><br>
-               Navigating the cloud security landscape - charting an expedition through AWS, Azure, and GCP.<br><br>
-               For more information, visit the following sections:<br><br>
-               - About<br>
-               - Resume<br>
-               - Blog<br>
-               - Gallery<br><br>
-               <span class="white-text">PS C:\\users\\administrator\\></span>`],
-    typeSpeed: 40,
-    startDelay: 1000,
-    showCursor: true,
-    cursorChar: '_',
-    contentType: 'html',
-    onComplete: function () {
-      const cursor = document.querySelector('.typed-cursor');
-      cursor.style.animation = 'completed-blink 1s infinite';
-    },
-  });
-});
-
-// About page terminal typing
-if (document.getElementById('terminal-about')) {
-  new Typed('#terminal-about', {
-    strings: [`<span class="white-text">PS C:\\users\\administrator\\> start about.html</span><br><br>
-    Access granted to about page.<br><br>
-    <span class="white-text">PS C:\\robbiemuellercom\\about.html></span>`],
-    typeSpeed: 40,
-    backSpeed: 20,
-    loop: false,
-    cursorChar: '_',
-    contentType: 'html',
-    onComplete: function () {
-      const cursor = document.querySelector('.typed-cursor');
-      cursor.style.animation = 'completed-blink 1s infinite';
-    },
-  });
-}
-
-if (document.getElementById('current-year')) {
-  const currentYear = new Date().getFullYear();
-  document.getElementById('current-year').textContent = currentYear;
-}
-
-// Resume page terminal typing
-if (document.getElementById('terminal-resume')) {
-  new Typed('#terminal-resume', {
-    strings: [`<span class="white-text">PS C:\\users\\administrator\\> start resume.html</span><br><br>
-    Access granted to resume.<br><br>
-    <span class="white-text">PS C:\\robbiemuellercom\\resume.html></span>`],
-    typeSpeed: 40,
-    backSpeed: 20,
-    loop: false,
-    cursorChar: '_',
-    contentType: 'html',
-    onComplete: function () {
-      const cursor = document.querySelector('.typed-cursor');
-      cursor.style.animation = 'completed-blink 1s infinite';
-    },
-  });
-}
-
-if (document.getElementById('current-year')) {
-  const currentYear = new Date().getFullYear();
-  document.getElementById('current-year').textContent = currentYear;
-}
-
 // Blog page terminal typing
 if (document.getElementById('terminal-blog')) {
   new Typed('#terminal-blog', {
@@ -120,11 +51,6 @@ if (document.getElementById('terminal-blog')) {
       cursor.style.animation = 'completed-blink 1s infinite';
     },
   });
-}
-
-if (document.getElementById('current-year')) {
-  const currentYear = new Date().getFullYear();
-  document.getElementById('current-year').textContent = currentYear;
 }
 
 // Gallery page terminal typing
