@@ -175,7 +175,6 @@ fetch("https://blog.robbiemueller.com/wp-json/wp/v2/posts?per_page=5")
       const link = document.createElement("a");
       link.classList.add("blog-post-link");
       link.href = post.link;
-      link.target = "_blank";
       link.textContent = "Read More";
 
       postElement.appendChild(title);
