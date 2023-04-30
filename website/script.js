@@ -149,3 +149,43 @@ if (document.getElementById('current-year')) {
   const currentYear = new Date().getFullYear();
   document.getElementById('current-year').textContent = currentYear;
 }
+
+//Blog
+fetch("https://blog.robbiemueller.com/wp-json/wp/v2/posts?per_page=5")
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById("blog-posts-container");
+
+    data.forEach(post => {
+      const postElement = document.createElement("div");
+      postElement.classList.add("blog-post");
+
+      const title = document.createElement("h2");
+      title.classList.add("blog-post-title");
+      title.textContent = post.title.rendered;
+
+      const date = document.createElement("p");
+      date.classList.add("blog-post-date");
+      date.textContent = new Date(post.date).toLocaleDateString();
+
+      const content = document.createElement("div");
+      content.classList.add("blog-post-content");
+      content.innerHTML = post.excerpt.rendered;
+
+      const link = document.createElement("a");
+      link.classList.add("blog-post-link");
+      link.href = post.link;
+      link.target = "_blank";
+      link.textContent = "Read More";
+
+      postElement.appendChild(title);
+      postElement.appendChild(date);
+      postElement.appendChild(content);
+      postElement.appendChild(link);
+
+      container.appendChild(postElement);
+    });
+  })
+  .catch(error => {
+    console.error("Error fetching blog posts:", error);
+  });
