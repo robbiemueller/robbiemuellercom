@@ -482,6 +482,7 @@ nav a.gallery-link:hover {
 .blog-post-title {
   font-weight: bold;
   margin-bottom: 0.5rem;
+  color: #7D55C7;
 }
 
 .blog-post-date {
@@ -495,7 +496,7 @@ nav a.gallery-link:hover {
 }
 
 .blog-post-link {
-  color: #0066cc;
+  color: #4D49BE;
   text-decoration: none;
 }
 
