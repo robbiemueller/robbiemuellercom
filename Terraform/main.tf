@@ -161,6 +161,14 @@ resource "aws_s3_bucket_object" "scriptjs" {
   depends_on   = [aws_s3_bucket.static_website]  
 }
 
+resource "aws_s3_bucket_object" "scriptjs" {
+  bucket = aws_s3_bucket.static_website.id
+  key    = "blogscript.js"
+  source = "${path.module}/../website/blogscript.js"
+  content_type = "application/javascript"
+  depends_on   = [aws_s3_bucket.static_website]  
+}
+
 resource "aws_s3_bucket_object" "stylecss" {
   bucket = aws_s3_bucket.static_website.id
   key    = "style.css"
